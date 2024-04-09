@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages SMS</title>
+</head>
+<body>
+    {% include 'header.html' %}
+    <a href="{{ url_for('numbers', country=country) }}">Retour</a>
+    <h1>Messages SMS pour {{ number }}</h1>
+    <ul>
+        {% for sms in sms_list %}
+            <li>{{ sms['FromNumber'] }} - {{ sms['Messagebody'] }} - {{ sms['message_time'] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

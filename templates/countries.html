@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pays Disponibles</title>
+
+    <style>
+        .countries-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: auto;
+            max-width: 70%;
+        }
+        .country-item {
+            flex-basis: 100%;
+            margin-bottom: 10px;
+            border: 1px solid #000;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Ajoutez cette ligne pour aligner les éléments verticalement */
+        }
+        .country-item img {
+        width: 50%; /* Réduire la taille de l'image à 50% */
+        height: auto; /* Conservez les proportions de l'image */
+        margin: auto; /* Centrer l'image */
+    }
+        @media (min-width: 768px) {
+            .country-item {
+                flex-basis: calc(25% - 10px);
+            }
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+    {% include 'header.html' %}
+    <h1>Pays Disponibles</h1>
+    <div class="countries-container">
+        {% for country in countries %}
+            <div class="country-item">
+                <img src="{{ url_for('static', filename='countries/' + country['Country_Name'] + '.png') }}" alt="Logo">
+                <a href="{{ url_for('numbers', country=country['Country_Name']) }}">{{ country['Country_Name'] }}</a>
+            </div>
+        {% endfor %}
+    </div>
+</body>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numéros disponibles pour {{ country }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f5f8;
+            color: #272f47;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .numbers-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .number-item {
+            width: calc(25% - 20px);
+            margin-bottom: 20px;
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+        }
+        .number-item a {
+            text-decoration: none;
+            color: #333;
+        }
+        .copy-icon {
+            position: absolute;
+            top: 30%;
+            right: 10px;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+        }
+        .sms-card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 22px;
+            width: 210px;
+        }
+        .sms-card__item {
+            display: flex;
+            align-items: center;
+        }
+        .icon {
+            width: 30px;
+            height: 30px;
+        }
+        .text--light {
+            margin-right: 10px;
+        }
+        .text--bold {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .space-after {
+            margin-right: 135px; /* Adjust the value as needed */
+        }
+        .space-after2 {
+            margin-right: 85px; /* Adjust the value as needed */
+        }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="container">
+        <a href="{{ url_for('countries') }}">Retour</a>
+        <h1>Numéros disponibles pour {{ country }}</h1>
+        <ul class="numbers-list">
+            {% for number in numbers %}
+                <li class="number-item">
+                    <a href="{{ url_for('sms', number=number['ToNumber']) }}">{{ number['ToNumber'] }}</a>
+                    <img class="copy-icon" src="{{ url_for('static', filename='copy.png') }}" alt="Copier" onclick="navigator.clipboard.writeText('{{ number['ToNumber'] }}')">
+                    <div class="number-actions">
+                        <button onclick="window.location.href='{{ url_for('sms', number=number['ToNumber']) }}'">Receive SMS</button>
+                        <div class="sms-card">
+                            <hr style="border-top: 1px solid black;">
+                            <div class="sms-card__info">
+                                <div class="sms-card__item">
+                                    <img src="../static/received.png" alt="SMS icon" class="icon">
+                                    <p class="text text--light">Received</p>
+                                    <p class="text text--bold space-after">3890</p>
+                                </div>
+                                <div class="sms-card__item">
+                                    <img src="../static/attestation.png" alt="Schedule icon" class="icon">
+                                    <p class="text text--light">Attestation</p>
+                                    <p class="text text--bold space-after2">2 Seconds ago</p>
+                                </div>
+                            </div>
+                            <div class="sms-card__bottom-bar">
+                                <img src="../static/signal_cellular.png" alt="Wi-Fi icon" class="icon">
+                                <a href="https://anonymsms.com/number/16462215628/" class="btn btn--blue btn--big">Receive SMS</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
