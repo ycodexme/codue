@@ -2,3 +2,4 @@ requests
 colorama
 pyfiglet
 pyperclip
+flask==2.2.2
