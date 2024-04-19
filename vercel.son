@@ -1,3 +1,5 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/css/index" }]
+  "rewrites": [
+    { "source": "/static/(.*)", "destination": "/public/static/:*" }
+  ]
 }
