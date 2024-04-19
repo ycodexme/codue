@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/static/(.*)", "destination": "/public/static/:*" }
+    { "source": "/templates/(.*)", "destination": "/public/templates/:*" }
   ]
 }
